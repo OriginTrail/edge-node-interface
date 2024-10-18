@@ -68,33 +68,32 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (import.meta.env.VITE_AUTH_ENABLED?.toLowerCase() !== "true") {
-    next();
-  } else {
-    if (to.matched.some((record) => record.meta.requiresAuth)) {
-      axios
-        .get(`${import.meta.env.VITE_AUTH_SERVICE_ENDPOINT}/auth/check`, {
-          withCredentials: true,
-        })
-        .then(async (response) => {
-          if (response.data.authenticated) {
-            const user = store.getters.getUser;
-            if (user === null) {
-              await store.dispatch("login", response.data.user);
-            }
-            next();
-          } else {
-            next("/login");
-          }
-        })
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        .catch((e) => {
-          next("/login");
-        });
-    } else {
-      next();
-    }
-  }
+  const hasUser = store.getters.getUser !== null;
+  const authRequired = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (!hasUser || authRequired)
+    return axios
+      .get(`${import.meta.env.VITE_AUTH_SERVICE_ENDPOINT}/auth/check`, {
+        withCredentials: true,
+      })
+      .then(async (response) => {
+        const authEnabled = response.headers["x-auth-enabled"] !== "false";
+        await store.dispatch("setAuthEnabled", authEnabled);
+        if (authEnabled && authRequired && !response.data.authenticated)
+          throw new Error("unauthenticated");
+        return response.data.user;
+      })
+      .then(async (user) => {
+        await store.dispatch("login", user);
+        next();
+      })
+      .catch(async (e) => {
+        await store.dispatch("logout");
+        console.error(e);
+        next("/login");
+      });
+
+  next();
 });
 
 export default router;
