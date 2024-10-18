@@ -3,13 +3,20 @@ import { createStore } from "vuex";
 const store = createStore({
   state: {
     user: null,
+    authEnabled: true,
   },
   mutations: {
+    setAuthEnabled(state, enabled) {
+      state.authEnabled = enabled;
+    },
     setUser(state, user) {
       state.user = user;
     },
   },
   actions: {
+    setAuthEnabled({ commit }, enabled) {
+      commit("setAuthEnabled", enabled);
+    },
     login({ commit }, user) {
       // Logic to log in the user
       commit("setUser", user);
@@ -20,6 +27,9 @@ const store = createStore({
     },
   },
   getters: {
+    isAuthEnabled(state) {
+      return state.authEnabled;
+    },
     isAuthenticated(state) {
       return !!state.user;
     },

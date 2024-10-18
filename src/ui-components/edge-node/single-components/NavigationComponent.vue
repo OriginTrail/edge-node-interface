@@ -41,7 +41,7 @@
       </div>
       <div class="d-flex align-items-center justify-content-start">
         <NotificationBadge v-if="isAuthenticated" />
-        <div v-if="isAuthenticated">
+        <div v-if="isAuthenticated && isAuthEnabled">
           <ion-tab-button tab="settings" disabled>
             <router-link to="/settings" class="router-link">
               <ion-label>
@@ -52,7 +52,7 @@
             </router-link>
           </ion-tab-button>
         </div>
-        <UserBadge v-if="isAuthenticated" />
+        <UserBadge v-if="isAuthenticated && isAuthEnabled" />
       </div>
     </ion-tab-bar>
   </ion-tabs>
@@ -76,6 +76,7 @@ const { appConfig, config } = useConfig();
 
 const store = useStore();
 const isAuthenticated = computed(() => store.getters.isAuthenticated);
+const isAuthEnabled = computed(() => store.getters.isAuthEnabled);
 const nodeName = config.getString("edge_node_name");
 </script>
 
