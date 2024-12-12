@@ -49,6 +49,21 @@
             </div>
           </div>
         </div>
+         <ExistingExamplesComponent />
+         
+
+         <div class="dashboard">
+          <div class="left">
+            <ActivityFeed />
+          </div>
+         
+          <div class="right">
+            <GraphsComponent />
+          </div>
+        </div>
+
+        <FooterComponent/>
+
       </div>
     </ion-content>
   </ion-page>
@@ -57,8 +72,18 @@
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
 
+import ExistingExamplesComponent from './LandingPageComponentes/ExistingExamplesComponent.vue';
+import ActivityFeed from "./LandingPageComponentes/ActivityFeedComponent.vue";
+import GraphsComponent from "./LandingPageComponentes/GraphsComponent.vue";
+import FooterComponent from "./LandingPageComponentes/FooterComponent.vue";
+
 export default {
-  components: { IonPage, IonContent },
+  components: { IonPage, IonContent,
+     ExistingExamplesComponent,
+     ActivityFeed,
+     GraphsComponent,
+     FooterComponent },
+  
 };
 </script>
 
@@ -108,6 +133,7 @@ export default {
           width: 100%;
           padding: 8px 24px;
         }
+        
         button {
           position: absolute;
           right: 12px;
@@ -181,4 +207,19 @@ export default {
     }
   }
 }
+
+.dashboard {
+  display: flex;
+  gap: 20px; /* Razmak između levog i desnog dela */
+  width: 100%; /* Osigurava da zauzima punu širinu ekrana */
+}
+
+.dashboard > .left, 
+.dashboard > .right {
+  flex: 1; /* Svaka polovina zauzima jednaku širinu */
+  background-color: #1b1b34; /* Opcionalno, pozadinska boja */
+  padding: 20px; /* Opcionalno, unutrašnji razmak */
+  border-radius: 10px; /* Opcionalno, zaobljeni uglovi */
+}
+
 </style>
