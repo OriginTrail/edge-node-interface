@@ -205,6 +205,7 @@
   
   <style scoped>
   .dashboard-charts {
+    width: 95%;
     background: radial-gradient(
             70% 100% at 20% 107.05%, /* Pomereno ulevo */
             #03061C 0%,
