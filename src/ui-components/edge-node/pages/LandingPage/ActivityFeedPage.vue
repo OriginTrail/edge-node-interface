@@ -2,16 +2,13 @@
   <ion-page>
     <ion-content class="background">
       <div class="d-flex flex-column position-relative home">
-        
-
         <div class="dkg-activity-feed">
-            <img src="/images/dkg-activity-feed.svg" alt="Opis slike">
+          <img src="/images/dkg-activity-feed.svg" alt="Opis slike" />
         </div>
 
-        <ActivityTable/>
+        <ActivityTable />
 
-        <FooterComponent/>
-
+        <FooterComponent />
       </div>
     </ion-content>
   </ion-page>
@@ -20,16 +17,11 @@
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
 
-
 import ActivityTable from "./ActivityFeedComponents/ActivityTableComponent.vue";
 import FooterComponent from "./LandingPageComponentes/FooterComponent.vue";
 
 export default {
-  components: { IonPage, IonContent,
-    ActivityTable,
-    FooterComponent,
- },
-  
+  components: { IonPage, IonContent, ActivityTable, FooterComponent },
 };
 </script>
 
@@ -79,7 +71,7 @@ export default {
           width: 100%;
           padding: 8px 24px;
         }
-        
+
         button {
           position: absolute;
           right: 12px;
@@ -161,7 +153,6 @@ export default {
 
   > .left,
   > .right {
-    
     flex: 1; /* Osigurava da oba dela zauzimaju po 50% prostora */
   }
 }
@@ -179,10 +170,8 @@ export default {
 }
 
 .dkg-activity-feed img {
-    width: 100%; /* Postavlja širinu slike na 100% širine roditeljskog elementa */
-    height: auto; /* Održava proporcije slike */
-    display: block; /* Uklanja nepotrebne praznine ispod slike */
+  width: 100%; /* Postavlja širinu slike na 100% širine roditeljskog elementa */
+  height: auto; /* Održava proporcije slike */
+  display: block; /* Uklanja nepotrebne praznine ispod slike */
 }
-
-
 </style>
