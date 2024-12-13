@@ -4,7 +4,7 @@
       <h2>Explore existing examples</h2>
     </div>
 
-    <!-- Novi div sa 5 centriranih divova u redu -->
+
     <div class="bottom-container">
       <div class="bottom-item">
         <div class="center-container">
@@ -48,7 +48,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* Razmak između komponenti */
+  gap: 20px; 
   width: 100%;
 }
 
@@ -81,13 +81,13 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px; /* Ograničena širina */
+  max-width: 1200px;
   gap: 10px;
-  flex-wrap: wrap; /* Omogućava prelamanje na manjem ekranu */
+  flex-wrap: wrap; 
 }
 
 .center-container p {
-  margin: 0; /* Ukloni default margine paragrafa */
+  margin: 0; 
   font-size: 1.2rem;
   font-weight: bold;
 }
