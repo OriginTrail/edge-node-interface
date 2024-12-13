@@ -1,5 +1,5 @@
 <template>
-  <!-- Hardkodovani podaci -->
+
   <div class="activity-item">
     <div class="details-left">
       <p class="powered-by-text">
@@ -29,8 +29,8 @@ export default {
 <style scoped>
 .activity-item {
   display: flex;
-  justify-content: space-between; /* Razmak između leva i desna */
-  align-items: center; /* Poravnavanje vertikalno */
+  justify-content: space-between;
+  align-items: center; 
   margin-bottom: 15px;
   padding: 20px;
   background: radial-gradient(
@@ -39,20 +39,20 @@ export default {
     #1b1b34 100%
   );
   border: 1.5px solid #8b85f4;
-  border-radius: 50px; /* Još zaobljenije ivice */
+  border-radius: 50px;
 }
 
 .details-left,
 .details-right {
-  flex: 1; /* Uzimaju isti prostor */
+  flex: 1; 
 }
 
 .details-left {
-  text-align: left; /* Levo poravnanje */
+  text-align: left; 
 }
 
 .details-right {
-  text-align: right; /* Desno poravnanje */
+  text-align: right;
 }
 .details-right p {
   color: #7f7f7f;
@@ -65,26 +65,26 @@ export default {
 
 .powered-by-text {
   display: inline-flex;
-  align-items: center; /* Poravnava sve elemente po sredini */
-  line-height: 1; /* Osigurava da "Powered by" i "Origin Trails" budu na istoj visini */
-  color: #a376db !important; /* Ljubičasta boja za tekst */
+  align-items: center; 
+  line-height: 1; 
+  color: #a376db !important; 
 }
 
 .powered-logo {
   display: inline-flex;
-  align-items: center; /* Poravnava logo i tekst */
+  align-items: center;
 }
 
 .powered-logo img {
-  width: 20px; /* Veličina logotipa, možete prilagoditi */
+  width: 20px; 
   height: auto;
-  margin-right: 4px; /* Razmak između logotipa i teksta */
+  margin-right: 4px; 
   margin-left: 10px;
 }
 
 .details-right p span {
   position: relative;
-  padding-right: 20px; /* Razmak od crte */
+  padding-right: 20px; 
 }
 
 .details-right p span::after {
@@ -92,10 +92,10 @@ export default {
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translateY(-50%); /* Centriranje crte vertikalno */
-  font-size: 30px; /* Povećajte veličinu crte */
-  color: #7f7f7f; /* Boja crte */
-  margin-left: 10px; /* Razmak između crte i sledećeg teksta */
+  transform: translateY(-50%);
+  font-size: 30px; 
+  color: #7f7f7f;
+  margin-left: 10px; 
   margin-right: 10px;
   font-weight: 300;
 }

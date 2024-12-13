@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { DKG_EXPLORER_URL } from "@/utils/constants";
+
 export default {
   name: "ActivityFeed",
   data() {
@@ -75,7 +77,8 @@ export default {
     const button = document.querySelector(".show-all-activity");
     if (button) {
       button.addEventListener("click", () => {
-        window.location.href = "http://localhost:5173/ActivityFeedPage";
+        window.location.href = "http://localhost:5173/activities";
+        //window.location.href = DKG_EXPLORER_URL + "/activities";
       });
     }
   },
@@ -84,10 +87,10 @@ export default {
 
 <style scoped>
 .activity-feed {
-  width: 100%; /* Zauzima ceo raspoloživi prostor */
+  width: 100%; 
   min-width: 50% !important;
-  max-width: 1200px; /* Opcionalno ograničenje širine */
-  margin: 0 auto; /* Centriranje kontejnera */
+  max-width: 1200px; 
+  margin: 0 auto;
 }
 
 .show-all {
@@ -101,9 +104,9 @@ export default {
 }
 
 .activity-item {
-  display: flex; /* Postavlja fleksibilni raspored */
-  align-items: center; /* Vertikalno poravnanje elemenata */
-  gap: 15px; /* Razmak između elemenata */
+  display: flex;
+  align-items: center;
+  gap: 15px; 
   margin-bottom: 15px;
   padding: 5px;
   background: radial-gradient(
@@ -114,19 +117,19 @@ export default {
   border: 1.5px solid #8b85f4;
   border-radius: 8px;
 
-  width: 100%; /* Aktivnost zauzima celu širinu */
-  box-sizing: border-box; /* Uključuje padding i border u širinu */
+  width: 100%; 
+  box-sizing: border-box; 
 }
 
 .icon-img {
   margin-left: 15px;
-  width: 70px; /* Širina slike */
-  height: 70px; /* Visina slike */
+  width: 70px; 
+  height: 70px;
 }
 
 .icon-img-small {
-  width: 20px; /* Širina slike */
-  height: 20px; /* Visina slike */
+  width: 20px; 
+  height: 20px; 
 }
 
 .details p {
@@ -138,13 +141,13 @@ export default {
 
 .nice-status {
   margin: 5px 2px;
-  padding: 5px 8px; /* Unutrašnje margine, prilagodite po želji */
-  background-color: #8b85f4; /* Ljubičasta boja */
-  color: white; /* Boja teksta */
-  border: none; /* Bez ivica */
-  border-radius: 25px; /* Zaobljeni uglovi */
-  font-size: 16px; /* Velicina fonta */
-  cursor: pointer; /* Kursor u obliku ruke */
+  padding: 5px 8px; 
+  background-color: #8b85f4; 
+  color: white;
+  border: none;
+  border-radius: 25px; 
+  font-size: 16px; 
+  cursor: pointer; 
 }
 
 .details {
@@ -153,52 +156,52 @@ export default {
 
 .inline-details {
   width: 100%;
-  display: flex; /* Postavlja elemente u isti red */
-  gap: 25px; /* Razmak između elemenata */
-  align-items: bottom; /* Vertikalno centriranje */
+  display: flex;
+  gap: 25px; 
+  align-items: bottom; 
   margin-top: 20px;
 }
 
 .inline-details p {
-  margin: 0; /* Uklanja dodatne margine između <p> elemenata */
+  margin: 0; 
 }
 
 .activity-header {
-  display: flex; /* Postavlja h2 i dugme u isti red */
-  justify-content: space-between; /* Postavlja razmak između h2 i dugmeta */
-  align-items: center; /* Vertikalno centriranje */
-  color: white; /* Bela boja teksta */
-  padding: 20px; /* Unutrašnji razmak */
-  border-radius: 10px; /* Zaobljeni uglovi */
-  background-image: url("/images/activity-feed.svg"); /* Dodaje sliku kao pozadinu */
-  background-size: cover; /* Sliku razvlači da pokrije ceo element */
-  background-position: center; /* Pozicionira sliku u centru */
-  background-repeat: no-repeat; /* Sprečava ponavljanje slike */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  color: white; 
+  padding: 20px; 
+  border-radius: 10px;
+  background-image: url("/images/activity-feed.svg"); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
   margin-bottom: 30px;
 }
 
 .activity-header h2 {
   font-family: "Space Grotesk";
-  margin: 0; /* Uklanja podrazumevane margine */
-  font-size: 1.5rem; /* Podešava veličinu fonta */
+  margin: 0; 
+  font-size: 1.5rem; 
 }
 
 .activity-header .show-all-activity {
-  background: none; /* Bez pozadine */
-  border: none; /* Bez ivica */
-  color: white; /* Bela boja teksta */
-  font-size: 1rem; /* Veličina fonta */
-  cursor: pointer; /* Pokazivač se menja u 'pointer' */
+  background: none; 
+  border: none; 
+  color: white; 
+  font-size: 1rem; 
+  cursor: pointer;
 }
 
 .ual {
-  color: #6d6ac6; /* Postavite željenu boju (ovde je narandžasta) */
-  font-weight: bold; /* Opcionalno, da se istakne */
+  color: #6d6ac6; 
+  font-weight: bold; 
 }
 
 .inline-row-style {
-  display: flex; /* Postavlja elemente u jedan red */
-  align-items: center; /* Vertikalno centriranje */
-  gap: 10px; /* Razmak između elemenata */
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
 }
 </style>

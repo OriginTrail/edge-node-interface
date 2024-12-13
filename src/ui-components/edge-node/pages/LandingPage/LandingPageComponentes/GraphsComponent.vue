@@ -214,8 +214,8 @@ export default {
   width: 95%;
   background: radial-gradient(
     70% 100% at 20% 107.05%,
-    /* Pomereno ulevo */ #03061c 0%,
-    #1b1b34 80% /* Jači prelaz sa ranijim završetkom */
+    #03061c 0%,
+    #1b1b34 80% 
   );
 
   padding: 20px;
@@ -249,23 +249,23 @@ export default {
 
 .icon-knowledge-asset {
   margin-top: 4px;
-  display: inline-block; /* Prikazuje element kao inline-block */
-  width: 24px; /* Širina ikone */
-  height: 20px; /* Visina ikone */
-  background-image: url("/images/icons/knowledge-asset.svg"); /* Putanja do slike */
-  background-size: cover; /* Da slika zauzme ceo prostor */
-  background-position: center; /* Centriranje slike */
-  background-repeat: no-repeat; /* Da se slika ne ponavlja */
+  display: inline-block;
+  width: 24px;
+  height: 20px;
+  background-image: url("/images/icons/knowledge-asset.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .icon-trac-token {
   margin-top: 4px;
-  display: inline-block; /* Prikazuje element kao inline-block */
-  width: 20px; /* Širina ikone */
-  height: 20px; /* Visina ikone */
-  background-image: url("/images/icons/trac-token-icon.svg"); /* Putanja do slike */
-  background-size: cover; /* Da slika zauzme ceo prostor */
-  background-position: center; /* Centriranje slike */
-  background-repeat: no-repeat; /* Da se slika ne ponavlja */
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("/images/icons/trac-token-icon.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>

@@ -148,30 +148,30 @@ export default {
 
 .dashboard {
   display: flex;
-  gap: 20px; /* Razmak između levog i desnog dela */
-  width: 100%; /* Osigurava da zauzima punu širinu */
+  gap: 20px;
+  width: 100%;
 
   > .left,
   > .right {
-    flex: 1; /* Osigurava da oba dela zauzimaju po 50% prostora */
+    flex: 1;
   }
 }
 
 @media (max-width: 1300px) {
   .dashboard {
-    flex-direction: column; /* Vertikalna orijentacija za mobilni prikaz */
+    flex-direction: column;
   }
 
   > .left,
   > .right {
-    flex: none; /* Resetuje flex za mobilni prikaz */
-    width: 100%; /* Elementi zauzimaju punu širinu */
+    flex: none;
+    width: 100%;
   }
 }
 
 .dkg-activity-feed img {
-  width: 100%; /* Postavlja širinu slike na 100% širine roditeljskog elementa */
-  height: auto; /* Održava proporcije slike */
-  display: block; /* Uklanja nepotrebne praznine ispod slike */
+  width: 100%;
+  height: auto;
+  display: block;
 }
 </style>

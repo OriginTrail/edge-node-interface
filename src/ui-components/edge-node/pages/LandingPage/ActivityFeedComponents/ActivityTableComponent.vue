@@ -73,8 +73,8 @@ export default {
   border-bottom: 1.5px solid rgba(139, 133, 244, 0.5);
   background: radial-gradient(
     53.33% 60.69% at 20% 50%,
-    /* Centar gradijenta pomeren ka levoj strani */ #03061c 0%,
-    /* Tamna boja u centru */ #1b1b34 100% /* Svetlija boja na ivicama */
+     #03061c 0%,
+    #1b1b34 100% 
   );
 
   padding: 10px 15px;
@@ -86,11 +86,11 @@ export default {
   padding: 10px 15px;
   text-align: left;
 
-  border-bottom: 1.5px solid rgba(139, 133, 244, 0.5); /* Horizontalna donja linija */
+  border-bottom: 1.5px solid rgba(139, 133, 244, 0.5); 
 }
 
 .custom-table tr:first-child th {
-  border-top: none; /* Uklanja gornju liniju iznad zaglavlja ako nije potrebna */
+  border-top: none;
 }
 
 .custom-table tr:hover {
@@ -109,6 +109,6 @@ export default {
   margin-left: 8px;
   background: url("/images/icons/purple-arrow.svg") no-repeat center center;
   background-size: contain;
-  float: right;
+ 
 }
 </style>

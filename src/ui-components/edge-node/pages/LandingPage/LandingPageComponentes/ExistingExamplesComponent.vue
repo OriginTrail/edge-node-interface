@@ -103,24 +103,24 @@ export default {
   );
   border: 1.5px solid #8b85f4;
   padding: 25px;
-  width: 18%; /* Svaki div zauzima 18% širine */
+  width: 18%; 
   text-align: center;
-  border-radius: 8px; /* Zaobljeni ivice */
+  border-radius: 8px; 
   font-size: 16px;
   font-family: "Space Grotesk";
   font-weight: 500;
-  min-width: 150px; /* Minimalna širina za svaki div */
+  min-width: 150px; 
 }
 
 @media (max-width: 768px) {
   .bottom-item {
-    width: 45%; /* Na manjim ekranima, divovi će zauzimati 45% */
+    width: 45%; 
   }
 }
 
 @media (max-width: 480px) {
   .bottom-item {
-    width: 100%; /* Na mobilnim ekranima, divovi zauzimaju celu širinu */
+    width: 100%; 
   }
 }
 </style>

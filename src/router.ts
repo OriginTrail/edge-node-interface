@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: false },
       },
       {
-        path: "/ActivityFeedPage",
+        path: "/activities",
         name: "ActivityFeedPage",
         component: () => {
           return import("./ui-components/edge-node/pages/LandingPage/ActivityFeedPage.vue");
