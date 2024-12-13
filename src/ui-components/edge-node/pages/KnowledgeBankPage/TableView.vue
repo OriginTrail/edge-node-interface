@@ -69,29 +69,29 @@
           width="420"
           show-overflow-tooltip
         />
-<!--        <el-table-column-->
-<!--          prop="sender"-->
-<!--          sortable-->
-<!--          label="Owner"-->
-<!--          min-width="160"-->
-<!--          show-overflow-tooltip-->
-<!--        />-->
-<!--        <el-table-column-->
-<!--          prop="transaction_hash"-->
-<!--          sortable-->
-<!--          label="TX Hash"-->
-<!--          show-overflow-tooltip-->
-<!--        >-->
-<!--          <template #default="scope">-->
-<!--            <a-->
-<!--              class="table-link"-->
-<!--              target="_blank"-->
-<!--              :href="`https://sepolia.basescan.org/tx/${scope.row.transaction_hash}`"-->
-<!--            >-->
-<!--              {{ scope.row.transaction_hash }}-->
-<!--            </a>-->
-<!--          </template>-->
-<!--        </el-table-column>-->
+        <!--        <el-table-column-->
+        <!--          prop="sender"-->
+        <!--          sortable-->
+        <!--          label="Owner"-->
+        <!--          min-width="160"-->
+        <!--          show-overflow-tooltip-->
+        <!--        />-->
+        <!--        <el-table-column-->
+        <!--          prop="transaction_hash"-->
+        <!--          sortable-->
+        <!--          label="TX Hash"-->
+        <!--          show-overflow-tooltip-->
+        <!--        >-->
+        <!--          <template #default="scope">-->
+        <!--            <a-->
+        <!--              class="table-link"-->
+        <!--              target="_blank"-->
+        <!--              :href="`https://sepolia.basescan.org/tx/${scope.row.transaction_hash}`"-->
+        <!--            >-->
+        <!--              {{ scope.row.transaction_hash }}-->
+        <!--            </a>-->
+        <!--          </template>-->
+        <!--        </el-table-column>-->
         <el-table-column
           prop="backend_synced_at"
           sortable

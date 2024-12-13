@@ -2,64 +2,11 @@
   <ion-page>
     <ion-content class="background">
       <div class="d-flex flex-column position-relative home">
-        <div class="banner">
-          <img
-            src="/images/explorer-cover.svg"
-            alt="Explorer Cover"
-            width="100%"
-          />
-          <div class="heading">
-            <h1>
-              Explore the Collective Neuro-Symbolic Decentralized Knowledge
-              Graph
-            </h1>
-            <form method="get" action="/explore">
-              <input
-                name="ual"
-                placeholder="Search by UAL or wallet address"
-                autocomplete="off"
-                required
-              />
-              <button>Search</button>
-            </form>
-          </div>
-          <div class="planet"></div>
+        <div class="dkg-activity-feed">
+          <img src="/images/dkg-activity-feed.svg" alt="Opis slike" />
         </div>
-        <div class="kpis d-flex flex-row">
-          <div>
-            <img
-              src="/images/explorer-kpi-left.svg"
-              alt="Explorer KPI Background Left"
-              width="100%"
-            />
-            <div class="kpi">
-              <h3>Number of Knowledge Assets</h3>
-              <span class="highlight">100 000 000</span>
-            </div>
-          </div>
-          <div>
-            <img
-              src="/images/explorer-kpi-right.svg"
-              alt="Explorer KPI Background Right"
-              width="100%"
-            />
-            <div class="kpi">
-              <h3>Total TRAC staked</h3>
-              <span>73 281 493.79</span>
-            </div>
-          </div>
-        </div>
-        <ExistingExamplesComponent />
 
-        <div class="dashboard">
-          <div class="left">
-            <ActivityFeed />
-          </div>
-
-          <div class="right">
-            <GraphsComponent />
-          </div>
-        </div>
+        <ActivityTable />
 
         <FooterComponent />
       </div>
@@ -70,20 +17,11 @@
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
 
-import ExistingExamplesComponent from "./LandingPageComponentes/ExistingExamplesComponent.vue";
-import ActivityFeed from "./LandingPageComponentes/ActivityFeedComponent.vue";
-import GraphsComponent from "./LandingPageComponentes/GraphsComponent.vue";
+import ActivityTable from "./ActivityFeedComponents/ActivityTableComponent.vue";
 import FooterComponent from "./LandingPageComponentes/FooterComponent.vue";
 
 export default {
-  components: {
-    IonPage,
-    IonContent,
-    ExistingExamplesComponent,
-    ActivityFeed,
-    GraphsComponent,
-    FooterComponent,
-  },
+  components: { IonPage, IonContent, ActivityTable, FooterComponent },
 };
 </script>
 
@@ -215,7 +153,6 @@ export default {
 
   > .left,
   > .right {
-    min-width: 50%;
     flex: 1;
   }
 }
@@ -232,4 +169,9 @@ export default {
   }
 }
 
+.dkg-activity-feed img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 </style>
