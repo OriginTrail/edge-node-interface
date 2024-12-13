@@ -3,14 +3,23 @@
       <div class="chart">
         <div class="chart-header">
           <h3>Number of Knowledge Assets on the DKG</h3>
-          <span class="value">4 503 319</span>
+          <div class="value-container">
+            <span class="icon-knowledge-asset"></span>
+            <span style="color: #8B85F4;"  class="value">4 503 319</span>
+          </div>
         </div>
         <canvas ref="knowledgeChart"></canvas>
       </div>
+    </div>
+  
+    <div class="dashboard-charts">
       <div class="chart">
         <div class="chart-header">
           <h3>Total Network Revenue (in TRAC)</h3>
-          <span class="value">4 503 319</span>
+          <div class="value-container">
+            <span class="icon-trac-token"></span>
+            <span style="color: #1ADEDC;" class="value">4 503 319</span>
+          </div>
         </div>
         <canvas ref="revenueChart"></canvas>
       </div>
@@ -18,21 +27,48 @@
   </template>
   
   <script>
-  import { Chart } from "chart.js";
+  import {
+    Chart,
+    LineController,
+    LineElement,
+    PointElement,
+    LinearScale,
+    Title,
+    CategoryScale,
+    Tooltip,
+    Legend,
+    Filler,
+  } from "chart.js";
+  
+  Chart.register(
+    LineController,
+    LineElement,
+    PointElement,
+    LinearScale,
+    Title,
+    CategoryScale,
+    Tooltip,
+    Legend,
+    Filler
+  );
   
   export default {
     name: "DashboardCharts",
     mounted() {
       this.$nextTick(() => {
-        console.log("DOM fully rendered. Now rendering charts...");
-        this.renderKnowledgeChart();
-        this.renderRevenueChart();
+        if (this.$refs.knowledgeChart && this.$refs.revenueChart) {
+          this.renderKnowledgeChart();
+          this.renderRevenueChart();
+        }
       });
     },
     methods: {
       renderKnowledgeChart() {
         const ctx = this.$refs.knowledgeChart.getContext("2d");
-        console.log("Rendering Knowledge Assets chart...");
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, "rgba(106, 27, 154, 0.5)");
+        gradient.addColorStop(1, "rgba(106, 27, 154, 0)");
+  
         new Chart(ctx, {
           type: "line",
           data: {
@@ -58,9 +94,11 @@
                 label: "Knowledge Assets",
                 data: [200, 200, 200, 300, 300, 300, 400, 400, 500, 600, 700, 800, 900, 1000, 1200],
                 borderColor: "#6a1b9a",
-                backgroundColor: "rgba(106, 27, 154, 0.2)",
+                backgroundColor: gradient,
                 borderWidth: 2,
                 fill: true,
+                pointRadius: 0,
+                tension: 0.4,
               },
             ],
           },
@@ -81,7 +119,7 @@
                   color: "#ffffff",
                 },
                 grid: {
-                  color: "rgba(255, 255, 255, 0.1)",
+                  display: false,
                 },
               },
             },
@@ -95,7 +133,10 @@
       },
       renderRevenueChart() {
         const ctx = this.$refs.revenueChart.getContext("2d");
-        console.log("Rendering Revenue chart...");
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, "rgba(3, 218, 197, 0.5)");
+        gradient.addColorStop(1, "rgba(3, 218, 197, 0)");
+  
         new Chart(ctx, {
           type: "line",
           data: {
@@ -121,9 +162,11 @@
                 label: "Revenue",
                 data: [100, 150, 200, 300, 400, 500, 700, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500],
                 borderColor: "#03dac5",
-                backgroundColor: "rgba(3, 218, 197, 0.2)",
+                backgroundColor: gradient,
                 borderWidth: 2,
                 fill: true,
+                pointRadius: 0,
+                tension: 0.4,
               },
             ],
           },
@@ -144,7 +187,7 @@
                   color: "#ffffff",
                 },
                 grid: {
-                  color: "rgba(255, 255, 255, 0.1)",
+                  display: false,
                 },
               },
             },
@@ -162,42 +205,64 @@
   
   <style scoped>
   .dashboard-charts {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #1b1b34;
+    background: radial-gradient(
+            70% 100% at 20% 107.05%, /* Pomereno ulevo */
+            #03061C 0%,
+            #1b1b34 80% /* Jači prelaz sa ranijim završetkom */
+          );
+
     padding: 20px;
     border-radius: 10px;
+    border: 1.5px solid #8b85f4;
   }
   
-  .chart {
-    background-color: #232342;
-    padding: 20px;
-    border-radius: 10px;
+  .dashboard-charts:not(:first-child) {
+    margin-top: 30px;
   }
   
   .chart-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+    flex-direction: column;
+    align-items: flex-start;
     color: #ffffff;
+    margin-bottom: 10px;
   }
   
   .chart-header h3 {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.2em;
   }
   
-  .chart-header .value {
-    font-size: 1.5rem;
+  .value-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.5em;
     font-weight: bold;
-    color: #4caf50;
   }
   
-  canvas {
-    width: 100% !important;
-    height: 300px !important;
+  .icon-knowledge-asset {
+    margin-top: 4px ;
+    display: inline-block; /* Prikazuje element kao inline-block */
+    width: 24px; /* Širina ikone */
+    height: 20px; /* Visina ikone */
+    background-image: url('/images/icons/knowledge-asset.svg'); /* Putanja do slike */
+    background-size: cover; /* Da slika zauzme ceo prostor */
+    background-position: center; /* Centriranje slike */
+    background-repeat: no-repeat; /* Da se slika ne ponavlja */
+
+  }
+
+
+  .icon-trac-token {
+    margin-top: 4px ;
+    display: inline-block; /* Prikazuje element kao inline-block */
+    width: 20px; /* Širina ikone */
+    height: 20px; /* Visina ikone */
+    background-image: url('/images/icons/trac-token-icon.svg'); /* Putanja do slike */
+    background-size: cover; /* Da slika zauzme ceo prostor */
+    background-position: center; /* Centriranje slike */
+    background-repeat: no-repeat; /* Da se slika ne ponavlja */
+
   }
   </style>
   

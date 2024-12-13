@@ -211,15 +211,25 @@ export default {
 .dashboard {
   display: flex;
   gap: 20px; /* Razmak između levog i desnog dela */
-  width: 100%; /* Osigurava da zauzima punu širinu ekrana */
+  width: 100%; /* Osigurava da zauzima punu širinu */
+
+  > .left,
+  > .right {
+    min-width: 50%;
+    flex: 1; /* Osigurava da oba dela zauzimaju po 50% prostora */
+  }
 }
 
-.dashboard > .left, 
-.dashboard > .right {
-  flex: 1; /* Svaka polovina zauzima jednaku širinu */
-  background-color: #1b1b34; /* Opcionalno, pozadinska boja */
-  padding: 20px; /* Opcionalno, unutrašnji razmak */
-  border-radius: 10px; /* Opcionalno, zaobljeni uglovi */
+@media (max-width: 1300px) {
+  .dashboard {
+    flex-direction: column; /* Vertikalna orijentacija za mobilni prikaz */
+  }
+
+  > .left,
+  > .right {
+    flex: none; /* Resetuje flex za mobilni prikaz */
+    width: 100%; /* Elementi zauzimaju punu širinu */
+  }
 }
 
 </style>

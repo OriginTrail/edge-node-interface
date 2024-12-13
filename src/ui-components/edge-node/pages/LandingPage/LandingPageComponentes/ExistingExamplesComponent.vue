@@ -115,7 +115,6 @@
     border-radius: 8px; /* Zaobljeni ivice */
     font-size: 16px;
     font-family: "Space Grotesk";
-    
     font-weight: 500;
     min-width: 150px; /* Minimalna širina za svaki div */
   }
