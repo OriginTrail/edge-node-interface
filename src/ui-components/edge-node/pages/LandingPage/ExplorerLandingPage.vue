@@ -16,7 +16,7 @@
             <form method="get" action="/explore">
               <input
                 name="ual"
-                placeholder="Search by UAL or wallet address"
+                placeholder="Search by UAL"
                 autocomplete="off"
                 required
               />
@@ -107,6 +107,10 @@ export default {
           height: 70px;
           width: 100%;
           padding: 8px 24px;
+
+          &:focus {
+            outline: none;
+          }
         }
         button {
           position: absolute;
@@ -114,7 +118,7 @@ export default {
           top: 50%;
           transform: translateY(-50%);
           background: radial-gradient(
-            53.33% 74.69% at 50% 107.05%,
+            53.33% 74.69% at 50% -7.05%,
             #d5d3f9 0%,
             #6344df 100%
           );

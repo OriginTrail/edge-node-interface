@@ -8,7 +8,10 @@
   font-family: "Overused Grotesk Semi Bold";
   src: url("/fonts/ttf/OverusedGrotesk-SemiBold.ttf") format("truetype");
 }
-
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("/fonts/ttf/RobotoMono-SemiBold.ttf") format("truetype");
+}
 /* Was used in some places in AI Assistant, experimental */
 // .overused {
 //   font-family: "Overused Grotesk";
@@ -64,6 +67,29 @@ ion-content.background {
   --background: #03061c; // url($background-image) 0 0/100% 100% no-repeat;
 }
 
+ion-loading {
+  --background: transparent !important;
+  --max-width: 280px;
+  --max-height: 90%;
+  --spinner-color: #8b85f4 !important;
+  --backdrop-opacity: 0.4 !important;
+  color: #8b85f4 !important;
+  font-size: 0.875rem;
+  backdrop-filter: blur(10px);
+
+  .loading-wrapper {
+    border-radius: 2px;
+    -webkit-padding-start: 24px;
+    padding-inline-start: 24px;
+    -webkit-padding-end: 24px;
+    padding-inline-end: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
 html {
   --ion-default-font: #{$primary-font};
   --ion-font-family: #{$primary-font};
@@ -113,8 +139,14 @@ a {
 .box {
   border-radius: 16px;
   border: 1.5px solid $primary-color-light !important;
-  background: $background-color !important;
-  backdrop-filter: blur(8.600000381469727px);
+  border: 1.5px solid rgba(139, 133, 244, 0.25) !important;
+  background: radial-gradient(
+      171.99% 145.85% at 104.55% -1.7%,
+      rgba(89, 106, 197, 0.3) 0%,
+      rgba(89, 106, 197, 0) 100%
+    ),
+    rgba(25, 25, 52, 0.25) !important;
+  background-blend-mode: overlay, normal, normal !important;
 }
 
 .header-logo-wrapper {

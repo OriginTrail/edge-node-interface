@@ -166,55 +166,55 @@
   }
 }
 
-.el-dialog {
-  text-align: center;
-  border: 1px solid $secondary-color;
-  padding: 36px 24px;
+// .el-dialog {
+//   text-align: center;
+//   border: 1px solid $secondary-color;
+//   padding: 36px 24px;
 
-  .el-dialog__header {
-    padding-right: 0;
+//   .el-dialog__header {
+//     padding-right: 0;
 
-    .el-dialog__headerbtn {
-      top: -12px;
-      right: -12px;
-      width: 24px;
-      height: 24px;
+//     .el-dialog__headerbtn {
+//       top: -12px;
+//       right: -12px;
+//       width: 24px;
+//       height: 24px;
 
-      $render-hexagon: false;
+//       $render-hexagon: false;
 
-      @if ($render-hexagon) {
-        background-color: transparent;
-      } @else {
-        border-radius: 50%;
-        border: 1px solid $secondary-color;
-        background-color: var(--el-dialog-bg-color);
-      }
+//       @if ($render-hexagon) {
+//         background-color: transparent;
+//       } @else {
+//         border-radius: 50%;
+//         border: 1px solid $secondary-color;
+//         background-color: var(--el-dialog-bg-color);
+//       }
 
-      i {
-        margin-top: 2.5px;
+//       i {
+//         margin-top: 2.5px;
 
-        @if ($render-hexagon) {
-          @include m.hexagon($secondary-color, 24px);
-          background-color: var(--el-dialog-bg-color);
-          color: $secondary-color;
-        }
-      }
-    }
-  }
+//         @if ($render-hexagon) {
+//           @include m.hexagon($secondary-color, 24px);
+//           background-color: var(--el-dialog-bg-color);
+//           color: $secondary-color;
+//         }
+//       }
+//     }
+//   }
 
-  .el-dialog__body {
-    color: $text-color-light;
-  }
+//   .el-dialog__body {
+//     color: $text-color-light;
+//   }
 
-  .el-dialog__footer {
-    text-align: center;
-    display: flex;
+//   .el-dialog__footer {
+//     text-align: center;
+//     display: flex;
 
-    button {
-      flex: 1;
-    }
-  }
-}
+//     button {
+//       flex: 1;
+//     }
+//   }
+// }
 
 .el-step.is-vertical {
   .el-step__head {

@@ -2,11 +2,11 @@ import * as THREE from "three";
 import SpriteText from "three-spritetext";
 
 export const GRAPH_OPTIONS = {
-  backgroundColor: "#03061C40",
+  backgroundColor: "#6344DF",
   warmupTicks: 100,
   cooldownTicks: 200,
   cooldownTime: 3000,
-  enableNodeDrag: false,
+  enableNodeDrag: true,
   linkDistance: 10,
   chargeStrength: -5,
 };
@@ -17,12 +17,12 @@ export const LINK = {
 };
 
 export const CAMERA = {
-  position: { x: 0, y: 0, z: 600 },
+  position: { x: 0, y: 0, z: 700 },
   target: { x: 0, y: 0, z: 0 },
   duration: 3000,
 };
 
-export const NODE_ZOOM = 15;
+export const NODE_ZOOM = 25;
 
 type GraphNodeId = string | number;
 
@@ -32,6 +32,7 @@ type GraphNodeData = {
   shape: string;
   size: number;
   glow?: boolean;
+  expanded: boolean;
 };
 
 type GraphNodeDynamicData = {
@@ -83,6 +84,12 @@ const nodeTypes = {
     shape: "ka",
     size: 10,
     glow: true,
+  },
+  knowledgeAssetClickable: {
+    type: "KNOWLEDGE_ASSET_CLICKABLE",
+    color: "#6344DF",
+    shape: "ka_clickable",
+    size: 6,
   },
   knowledgeAssetHidden: {
     type: "KNOWLEDGE_ASSET_HIDDEN",
@@ -161,9 +168,8 @@ export function getNodeMesh(node: GraphNode) {
 
   let geometry, material;
   switch (node.shape) {
-    case "hexagonal_prism":
-      const radius = 8;
-
+    case "ka2":
+      const radius = 6;
       const shape = new THREE.Shape();
       const angle = Math.PI / 3;
       const points = [];
@@ -181,36 +187,116 @@ export function getNodeMesh(node: GraphNode) {
       shape.lineTo(points[0].x, points[0].y);
 
       const extrudeSettings = {
-        depth: 2,
-        bevelEnabled: true,
-        bevelSegments: 50,
-        steps: 10,
-        bevelSize: 5,
-        bevelThickness: 1,
+        depth: 0.4, // Depth of extrusion (thickness of the ring)
+        bevelEnabled: true, // Enable bevel to round the edges
+        bevelThickness: 0.4, // Thickness of the bevel
+        bevelSize: 0.6, // Size of the bevel
+        bevelOffset: 0, // Offset of the bevel
+        bevelSegments: 5,
+        UVGenerator: {
+          generateTopUV: (geometry, vertices, indexA, indexB, indexC) => {
+            const ax = vertices[indexA * 3];
+            const ay = vertices[indexA * 3 + 1];
+            const bx = vertices[indexB * 3];
+            const by = vertices[indexB * 3 + 1];
+            const cx = vertices[indexC * 3];
+            const cy = vertices[indexC * 3 + 1];
+
+            // Normalize UV coordinates to range [0, 1]
+            return [
+              new THREE.Vector2(
+                ax / (2 * radius) + 0.5,
+                ay / (2 * radius) + 0.5,
+              ),
+              new THREE.Vector2(
+                bx / (2 * radius) + 0.5,
+                by / (2 * radius) + 0.5,
+              ),
+              new THREE.Vector2(
+                cx / (2 * radius) + 0.5,
+                cy / (2 * radius) + 0.5,
+              ),
+            ];
+          },
+          generateSideWallUV: (
+            geometry,
+            vertices,
+            indexA,
+            indexB,
+            indexC,
+            indexD,
+          ) => {
+            return [
+              new THREE.Vector2(0, 0),
+              new THREE.Vector2(1, 0),
+              new THREE.Vector2(1, 1),
+              new THREE.Vector2(0, 1),
+            ];
+          },
+        },
       };
 
       geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-      material = new THREE.MeshPhongMaterial({
-        color: node.color,
-        emissive: node.color,
+
+      const loader = new THREE.TextureLoader();
+      const texture = loader.load("./images/Gradient KA.png");
+      texture.colorSpace = THREE.SRGBColorSpace;
+
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      texture.repeat.set(1, 1);
+
+      const materialWithTexture = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: false,
+        opacity: 1,
+      });
+
+      const materialWithoutTexture = new THREE.MeshPhongMaterial({
+        color: 0xffffff,
+        emissive: 0xffffff,
         emissiveIntensity: 0.5,
         shininess: 10,
         specular: "#ffffff",
         transparent: false,
         opacity: 1,
       });
+      const mesh = new THREE.Mesh(geometry, [
+        materialWithTexture,
+        materialWithoutTexture,
+      ]);
+
+      return mesh;
       break;
     case "octahedron":
-      geometry = new THREE.OctahedronGeometry(6);
-      material = new THREE.MeshPhongMaterial({
-        color: node.color,
-        emissive: node.color,
-        emissiveIntensity: 0.5,
-        shininess: 10,
-        specular: "#ffffff",
-        transparent: false,
-        opacity: 1,
-      });
+      const imgTexture3 = new THREE.TextureLoader().load(
+        `./images/Lock KA.png`,
+      );
+      imgTexture3.colorSpace = THREE.SRGBColorSpace;
+      const sprite3 = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: imgTexture3,
+          transparent: true,
+          alphaTest: 0,
+        }),
+      );
+      sprite3.scale.set(node.size * 2, node.size * 2, 0);
+      return sprite3;
+      break;
+    case "ka_clickable":
+      const imgTexture2 = new THREE.TextureLoader().load(
+        `./images/Purple KA.png`,
+      );
+      imgTexture2.colorSpace = THREE.SRGBColorSpace;
+      const sprite2 = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: imgTexture2,
+          transparent: true,
+          alphaTest: 0,
+        }),
+      );
+      sprite2.scale.set(node.size * 2, node.size * 2, 0);
+      return sprite2;
       break;
     case "sphere":
       geometry = new THREE.SphereGeometry(4);
@@ -266,7 +352,7 @@ export function getNodeMesh(node: GraphNode) {
       return group;
     case "ka":
       const imgTexture = new THREE.TextureLoader().load(
-        `./images/explorer-ka.png`,
+        `./images/White outlline KA 1.png`,
       );
       imgTexture.colorSpace = THREE.SRGBColorSpace;
       const sprite = new THREE.Sprite(
@@ -352,6 +438,7 @@ export const createNode = (
     glow: Math.random() >= 0.5 ? true : false,
     ...data,
     value,
+    expanded: false,
   };
 };
 
@@ -392,10 +479,17 @@ export class KnowledgeGraph {
       this.nodes.push(createNode("knowledgeCollection", ual));
     }
 
-    if (options.assertion) this.addKnowledgeAssets(...options.assertion);
+    if (options.assertion)
+      this.addKnowledgeAssets(
+        options.assertion,
+        options.showKnowledgeCollection ? ual : undefined,
+      );
   }
 
-  addKnowledgeAssets(...assertion: KnowledgeGraphAssertion[]) {
+  addKnowledgeAssets(
+    assertion: KnowledgeGraphAssertion[],
+    collectionId: string | undefined,
+  ) {
     for (const ka of assertion) {
       if (!("@id" in ka))
         throw new Error("Unexpected error - no @id field in assertion!");
@@ -420,7 +514,12 @@ export class KnowledgeGraph {
           let target_id = prop["@id"];
           if (target_id) {
             if (!(target_id in this.resolvedMap)) {
-              const mockNode = createNode("knowledgeAssetHidden", target_id);
+              let mockNode;
+              if (target_id.startsWith("did:dkg")) {
+                mockNode = createNode("knowledgeAssetClickable", target_id);
+              } else {
+                mockNode = createNode("knowledgeAssetHidden", target_id);
+              }
               this.nodes.push(mockNode);
               this.resolvedMap[target_id] = this.nodes.length - 1;
             }
@@ -451,69 +550,13 @@ export class KnowledgeGraph {
 
       if (this.knowledgeCollectionShown)
         this.links.push(createLink(this.ual, ka_id, "directedCollection"));
+
+      //if (collectionId)
+      //this.links.push(createLink(collectionId, ka_id, "directedCollection"));
     }
   }
 
   get data() {
     return { nodes: this.nodes, links: this.links };
   }
-}
-
-export function generateGraphData() {
-  const nodes = [];
-  const links = [];
-  let currentNodeId = 100;
-
-  nodes.push(createNode("knowledgeCollection", currentNodeId));
-  const hexagonalPrismId = currentNodeId;
-  currentNodeId++;
-
-  for (let i = 0; i < 2; i++) {
-    nodes.push(createNode("property", currentNodeId));
-    links.push(
-      createLink(hexagonalPrismId, currentNodeId, "directedCollection"),
-    );
-    currentNodeId++;
-  }
-
-  nodes.push(createNode("knowledgeAsset", currentNodeId));
-  const octahedronId = currentNodeId;
-  links.push(createLink(hexagonalPrismId, octahedronId, "directedCollection"));
-  currentNodeId++;
-
-  nodes.push(createNode("owner", currentNodeId));
-  links.push(
-    createLink(hexagonalPrismId, currentNodeId, "undirectedCollection"),
-  );
-  currentNodeId++;
-
-  for (let i = 0; i < 3; i++) {
-    nodes.push(createNode("property", currentNodeId));
-    links.push(createLink(octahedronId, currentNodeId, "undirected"));
-    currentNodeId++;
-  }
-
-  const octahedronsToConnect = [];
-  for (let i = 0; i < 2; i++) {
-    nodes.push(createNode("knowledgeAsset", currentNodeId));
-    octahedronsToConnect.push(currentNodeId);
-    links.push(createLink(octahedronId, currentNodeId, "directed"));
-    currentNodeId++;
-  }
-
-  octahedronsToConnect.forEach((octahedron) => {
-    nodes.push(createNode("array", currentNodeId));
-    links.push(createLink(octahedron, currentNodeId, "undirected"));
-    currentNodeId++;
-  });
-
-  // Add two properties to the last knowledge asset (octahedron) node
-  const lastKnowledgeAssetId = currentNodeId - 1; // Last knowledge asset is the last node added
-  for (let i = 0; i < 2; i++) {
-    nodes.push(createNode("property", currentNodeId));
-    links.push(createLink(lastKnowledgeAssetId, currentNodeId, "undirected"));
-    currentNodeId++;
-  }
-
-  return { nodes, links };
 }

@@ -5,74 +5,101 @@
         <div class="page">
           <div class="sidebar">
             <div class="input">
-              <input type="search" placeholder="Search by UAL" />
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M19.3333 13.25C15.9736 13.25 13.25 15.9736 13.25 19.3333C13.25 22.6931 15.9736 25.4167 19.3333 25.4167C20.7429 25.4167 22.0404 24.9373 23.0719 24.1326L25.4696 26.5303L25.9999 27.0607L27.0606 26L26.5303 25.4697L24.1326 23.072C24.9372 22.0405 25.4167 20.7429 25.4167 19.3333C25.4167 15.9736 22.6931 13.25 19.3333 13.25ZM22.7427 22.3966C23.4726 21.5848 23.9167 20.5109 23.9167 19.3333C23.9167 16.802 21.8646 14.75 19.3333 14.75C16.802 14.75 14.75 16.802 14.75 19.3333C14.75 21.8646 16.802 23.9167 19.3333 23.9167C20.5109 23.9167 21.5848 23.4726 22.3966 22.7427L22.7427 22.3966Z"
-                  fill="#8B85F4"
+              <form method="get" action="/explore">
+                <input
+                  name="ual"
+                  placeholder="Search by UAL"
+                  required
+                  autocomplete="off"
                 />
-              </svg>
+                <button>
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M19.3333 13.25C15.9736 13.25 13.25 15.9736 13.25 19.3333C13.25 22.6931 15.9736 25.4167 19.3333 25.4167C20.7429 25.4167 22.0404 24.9373 23.0719 24.1326L25.4696 26.5303L25.9999 27.0607L27.0606 26L26.5303 25.4697L24.1326 23.072C24.9372 22.0405 25.4167 20.7429 25.4167 19.3333C25.4167 15.9736 22.6931 13.25 19.3333 13.25ZM22.7427 22.3966C23.4726 21.5848 23.9167 20.5109 23.9167 19.3333C23.9167 16.802 21.8646 14.75 19.3333 14.75C16.802 14.75 14.75 16.802 14.75 19.3333C14.75 21.8646 16.802 23.9167 19.3333 23.9167C20.5109 23.9167 21.5848 23.4726 22.3966 22.7427L22.7427 22.3966Z"
+                      fill="#8B85F4"
+                    />
+                  </svg>
+                </button>
+              </form>
             </div>
-            <hgroup>
-              <h1>Knowledge Asset profile</h1>
-              <p>Latest update: 02/06/2023</p>
-            </hgroup>
+
             <div class="info box">
+              <hgroup>
+                <h1>Knowledge Asset profile</h1>
+                <p>Latest update: 02/06/2023</p>
+              </hgroup>
+              <hr />
               <div class="main">
-                <img src="/images/ka.svg" />
+                <img class="ka-image" src="/images/White outlline KA 1.png" />
                 <div>
                   <dl>
-                    <dt>Name:</dt>
-                    <dd>
-                      “Machine Learning Algorithms for Predicting Stock Market
-                      Trends: A Comparative Study”
-                    </dd>
                     <dt>Owner:</dt>
-                    <dd><a>Machine entusiast</a></dd>
+                    <dd><a>OriginTrail</a></dd>
                     <dt>UAL:</dt>
-                    <dd><a>did:otp:0xDbF8e9d36A73C.../32145</a></dd>
+                    <dd>
+                      <a>{{ ual }}</a>
+                    </dd>
                     <dt>Blockchain:</dt>
-                    <dd><img /> Base</dd>
+                    <dd><img /> {{ blockchain }}</dd>
                   </dl>
                 </div>
               </div>
               <hr />
               <dl class="description">
-                <dt>Description:</dt>
-                <dd>
-                  “Dopamine plays important roles in cognitive function and
-                  inflamation and therefore is involved in the pathogenesis of
-                  neurodegenerative diseases, including Alzheimer’s disease
-                  (AD). Drugs that increase or maintain dopamine levels in the
-                  brain could be a therapeutic strategy for AD. However, the
-                  effects of dopamine and its precursor levodopa (L_DOPA) on
-                  Ab/tau pathology in vivo and the underlying molecular)"
+                <dt class="col-3 d-flex">JSON:</dt>
+                <dd class="col-9">
+                  <div>
+                    {{ assertion ? JSON.stringify(assertion, null, 2) : "" }}
+                  </div>
                 </dd>
               </dl>
+              <el-button link type="primary" @click="showJson = true"
+                >View more</el-button
+              >
             </div>
           </div>
           <div ref="graphContainer" class="box graph-container"></div>
         </div>
       </div>
+      <teleport to="body">
+        <el-dialog
+          v-model="showJson"
+          @close="showJson = false"
+          width="800"
+          height="600"
+        >
+          <div class="dialog-content">
+            <pre>{{ assertion ? JSON.stringify(assertion, null, 2) : "" }}</pre>
+          </div>
+          <template #footer>
+            <CopyTextButton
+              copy-text="Copy JSON"
+              :text-to-copy="JSON.stringify(assertion, null, 2)"
+              button-size="large"
+            >
+              <img src="/images/chatdkg/icons/copy.svg" />
+            </CopyTextButton>
+          </template>
+        </el-dialog>
+      </teleport>
     </ion-content>
   </ion-page>
 </template>
 
 <script>
-import { IonContent, IonPage } from "@ionic/vue";
+import { IonContent, IonPage, loadingController } from "@ionic/vue";
 import ForceGraph3D from "3d-force-graph";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import * as THREE from "three"; // Import three.js
 import {
-  generateGraphData,
   getNodeMesh,
   getLinkMesh,
   CAMERA,
@@ -80,9 +107,11 @@ import {
   GRAPH_OPTIONS,
   KnowledgeGraph,
 } from "@/utils/graphUtils";
+import { getAssetByUal } from "@/services/assetsService.js";
+import CopyTextButton from "@/ui-components/ai-assistant/Answer/CopyTextButton.vue";
 
 export default {
-  components: { IonPage, IonContent },
+  components: { IonPage, IonContent, CopyTextButton },
   name: "KnowledgeGraphPage",
   props: {
     ual: {
@@ -93,14 +122,26 @@ export default {
   data() {
     return {
       targetNode: null,
+      graphInstance: null,
+      assertion: null,
+      showJson: false,
       // idMap: {},
     };
+  },
+  computed: {
+    blockchain() {
+      if (!this.ual) return "";
+      else if (this.ual.includes("base:")) return "Base";
+      else if (this.ual.includes("otp:")) return "NeuroWeb";
+      else if (this.ual.includes("gnosis:")) return "Gnosis";
+      else return "Blockchain";
+    },
   },
   watch: {},
   mounted() {
     this.graph = null;
-    this.$nextTick(() => {
-      this.initializeGraph();
+    this.$nextTick(async () => {
+      await this.initializeGraph();
     });
   },
   beforeDestroy() {
@@ -110,8 +151,8 @@ export default {
     }
   },
   methods: {
-    initializeGraph() {
-      const gData = generateGraphData();
+    async initializeGraph() {
+      const gData = { nodes: [], links: [] };
 
       const graph = ForceGraph3D({
         controlType: "orbit",
@@ -125,7 +166,7 @@ export default {
       graph.height(1);
       setTimeout(() => {
         graph.width(this.$refs.graphContainer.clientWidth);
-        graph.height(this.$refs.graphContainer.clientHeight);
+        graph.height(this.$refs.graphContainer.clientHeight + 180);
       }, 50);
 
       // Customize graph options based on your requirements
@@ -144,9 +185,9 @@ export default {
       });
 
       graph
-        .linkWidth(0.5)
-        .linkColor("#dcdcdc")
-        .linkOpacity(0.3)
+        .linkWidth(0.4)
+        .linkColor("#ffffff")
+        .linkOpacity(1)
         .linkThreeObjectExtend(true)
         .linkThreeObject((link) => {
           return getLinkMesh(link);
@@ -165,7 +206,7 @@ export default {
       graph.graphData(gData);
 
       let lights = [];
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
       lights.push(ambientLight);
 
       const directionalLight = new THREE.DirectionalLight(0xffffff, 0.7);
@@ -173,8 +214,24 @@ export default {
       lights.push(directionalLight);
 
       graph.lights(lights);
-      graph.onNodeClick((node) => {
-        this.zoomInOnNode(node);
+      graph.onNodeClick(async (node) => {
+        if (node.id.startsWith("did:dkg") && !node.expanded) {
+          const loading = await loadingController.create({
+            message: "Expanding Knowledge Asset...",
+          });
+          loading.present();
+          const asset = await getAssetByUal(node.id);
+          loading.dismiss();
+          if (!asset) {
+            console.error("Failed to load asset for UAL:", node.id);
+          } else {
+            node.expanded = true;
+            this.graphInstance.addKnowledgeAssets(asset.assertion, node.id);
+            this.graph.graphData(this.graphInstance.data);
+          }
+        } else {
+          this.zoomInOnNode(node);
+        }
       });
 
       const bloomPass = new UnrealBloomPass();
@@ -182,193 +239,30 @@ export default {
       bloomPass.radius = 1;
       bloomPass.threshold = 0;
 
-      graph.postProcessingComposer().addPass(bloomPass);
+      //graph.postProcessingComposer().addPass(bloomPass);
       this.graph = graph;
-      this.loadGraphForUAL(this.ual);
+      await this.loadGraphForUAL(this.ual);
     },
-    loadGraphForUAL(ual) {
-      // TODO
-      const dataset = {
-        public: {
-          "@context": ["https://schema.org"],
-          "@id": "uuid:1",
-          company: ["OT", "TraceLabs"],
-          user: {
-            "@id": "uuid:user:1",
-          },
-          city: {
-            "@id": "uuid:belgrade",
-          },
-        },
-        private: {
-          "@context": ["https://schema.org"],
-          "@graph": [
-            {
-              "@id": "uuid:user:1",
-              name: "Adam",
-              lastname: "Smith",
-            },
-            {
-              "@id": "uuid:belgrade",
-              title: "Belgrade",
-              postCode: "11000",
-            },
-            {
-              problem: "emptyy",
-            },
-            {
-              solution: "generatee",
-            },
-          ],
-        },
-      };
-      const getResult = {
-        assertion: [
-          {
-            "@id": "uuid:1",
-            "http://schema.org/city": [{ "@id": "uuid:belgrade" }],
-            "http://schema.org/company": [
-              { "@value": "OT" },
-              { "@value": "TraceLabs" },
-            ],
-            "http://schema.org/user": [{ "@id": "uuid:user:1" }],
-          },
-          {
-            "@id": "uuid:61e4e65b-954b-4e61-9ed5-0cd0cb4f8f19",
-            "http://schema.org/problem": [{ "@value": "empty" }],
-            "https://ontology.origintrail.io/dkg/1.0#privateAssertionID": [
-              {
-                "@value":
-                  "0xeefb437b24e5c5efe25eae42fe0aef075ddf49a3246c27fb8ceb371df92b6592",
-              },
-            ],
-          },
-          {
-            "@id": "uuid:7967c058-2409-4414-917a-8e792996e8c7",
-            "http://schema.org/solution": [{ "@value": "generate" }],
-            "https://ontology.origintrail.io/dkg/1.0#privateAssertionID": [
-              {
-                "@value":
-                  "0x55d0e89b9c2bde84af95fc30735bcb835e3f652e52a4222179ce7271bfd9c69a",
-              },
-            ],
-          },
-          {
-            "@id": "uuid:belgrade",
-            "http://schema.org/postCode": [{ "@value": "11000" }],
-            "http://schema.org/title": [{ "@value": "Belgrade" }],
-            "https://ontology.origintrail.io/dkg/1.0#privateAssertionID": [
-              {
-                "@value":
-                  "0xcc144908f7c85b1318bb600517d077a5fcf122d84901e0508180752802334a6b",
-              },
-            ],
-          },
-          {
-            "@id": "uuid:user:1",
-            "http://schema.org/lastname": [{ "@value": "Smith" }],
-            "http://schema.org/name": [{ "@value": "Adam" }],
-            "https://ontology.origintrail.io/dkg/1.0#privateAssertionID": [
-              {
-                "@value":
-                  "0xbd63fb177e23a4a90cf8fe60567aa5da19db3ebde18d51893acf92f04b6878d6",
-              },
-            ],
-          },
-        ],
-        operation: {
-          get: {
-            operationId: "32d9ad1a-7c16-40be-a0de-5e25f7e4ae21",
-            status: "COMPLETED",
-          },
-        },
-      };
+    async loadGraphForUAL(
+      ual = "did:dkg:hardhat2:31337/0x8aafc28174bb6c3bdc7be92f18c2f134e876c05e/2",
+    ) {
+      const loading = await loadingController.create({
+        message: "Loading Knowledge Asset...",
+      });
 
-      const getResult2 = {
-        assertion: [
-          {
-            "@id":
-              "https://ontology.origintrail.io/dkg/1.0#metadata-hash:0x3e9a458c821be3c074437941a52f8b99a62eb786b4806f6b4bc679204fd1d867",
-            "https://ontology.origintrail.io/dkg/1.0#representsPrivateResource":
-              [
-                {
-                  "@id": "uuid:17882f8e-e5a5-4c31-81d0-993bdd5cb43d",
-                },
-              ],
-          },
-          {
-            "@id":
-              "https://ontology.origintrail.io/dkg/1.0#metadata-hash:0x4414ac584c1838f95d96e553fe0991a9d6e9d8af5f4a3c3de4d0eb7f28e02244",
-            "https://ontology.origintrail.io/dkg/1.0#representsPrivateResource":
-              [
-                {
-                  "@id": "uuid:4723040c-8917-4985-a0d7-b6fe2f5ab858",
-                },
-              ],
-          },
-          {
-            "@id":
-              "https://ontology.origintrail.io/dkg/1.0#metadata-hash:0x68c2bf4b989458ecd9ec144c58b4389c4f7a7a05a4cf590256c9875cf4dea846",
-            "https://ontology.origintrail.io/dkg/1.0#representsPrivateResource":
-              [
-                {
-                  "@id": "uuid:c9ba85b4-f2ce-48c3-b59d-92af01603526",
-                },
-              ],
-          },
-          {
-            "@id":
-              "https://ontology.origintrail.io/dkg/1.0#metadata-hash:0x70e71eca692a451d414108bd51a04914b65c9bbe8b1f7d2737e7ebd364027ecb",
-            "https://ontology.origintrail.io/dkg/1.0#representsPrivateResource":
-              [
-                {
-                  "@id": "uuid:eca14561-9c0a-4354-a292-7ceb1623c997",
-                },
-              ],
-          },
-          {
-            "@id": "uuid:1",
-            "http://schema.org/city": [
-              {
-                "@id": "uuid:belgrade",
-              },
-            ],
-            "http://schema.org/company": [
-              {
-                "@value": "OT",
-              },
-              {
-                "@id": "urn:gg:1",
-              },
-            ],
-            "http://schema.org/user": [
-              {
-                "@id": "uuid:user:1",
-              },
-            ],
-          },
-          {
-            "@id": "uuid:4b8d6631-a75e-4b58-8451-1626e37d2e77",
-            "https://ontology.origintrail.io/dkg/1.0#privateMerkleRoot": [
-              {
-                "@value":
-                  "0x65a88ff6f248c3d537d3c9d278eecb5339c1a067aae5d2fc1ac100a458d10350",
-              },
-            ],
-          },
-        ],
-        operation: {
-          get: {
-            operationId: "294d449f-ec98-435d-812e-8ebe890255bd",
-            status: "COMPLETED",
-          },
-        },
-      };
+      loading.present();
+      const asset = await getAssetByUal(ual);
+      if (!asset) {
+        console.error("Failed to load asset for UAL:", ual);
+        return;
+      }
+      loading.dismiss();
 
-      console.log("Loading graph for UAL:", ual);
-
-      const graph = new KnowledgeGraph(ual, { assertion: getResult.assertion });
-      this.graph.graphData(graph.data);
+      this.graphInstance = new KnowledgeGraph(ual, {
+        assertion: asset.assertion,
+      });
+      this.assertion = asset.assertion;
+      this.graph.graphData(this.graphInstance.data);
     },
     zoomInOnNode(node) {
       if (this.targetNode?.id === node.id) {
@@ -413,32 +307,61 @@ export default {
     }
 
     .input {
-      & > input {
-        background: $background-color;
-        outline: none;
-        border: 1.5px solid $primary-color-light;
-        border-radius: 50px;
-        height: 48px;
-        padding: 8px 16px;
+      width: 400px;
+
+      background: #03061c;
+      outline: none;
+      border: 1.5px solid $primary-color-light;
+      border-radius: 50px;
+      height: 48px;
+      padding-left: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      form {
         width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      input {
+        width: 80%;
+        color: white;
+        background: transparent;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+        &:focus-visible {
+          border: none;
+          outline-width: 0;
+        }
       }
 
       position: relative;
 
-      & > svg {
-        position: absolute;
-        right: 8px;
-        height: 48px;
-        width: 48px;
+      button {
+        background-color: transparent;
       }
     }
     hgroup {
-      padding: 12px;
-      background: url(/images/ka-profile-background.svg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
+      //padding: 12px;
+      // background: url(/images/ka-profile-background.svg);
+      // background-position: center;
+      // background-repeat: no-repeat;
+      // background-size: contain;
       h1 {
+        margin: 0;
+        margin-bottom: 4px;
+        font-family: Manrope;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 16px;
+      }
+      border-bottom: h1 {
         font-weight: bold;
         font-size: 16px;
         font-family: "Manrope";
@@ -452,14 +375,21 @@ export default {
       padding: 24px 12px;
       .main {
         display: flex;
-        align-items: start;
+        align-items: center;
         gap: 12px;
+
+        .ka-image {
+          max-height: 100px;
+        }
 
         dl {
           display: grid;
           grid-template-columns: auto 1fr;
 
           dt {
+            font-size: 14px;
+            line-height: 16px;
+            margin: 0;
             font-weight: 400;
           }
 
@@ -470,6 +400,8 @@ export default {
 
             color: #fff;
             font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
 
             a {
               font-weight: 500;
@@ -489,10 +421,28 @@ export default {
           padding-right: 12px;
         }
 
+        dd {
+          overflow: hidden;
+          width: 100%;
+          color: var(--text-tx-white-primary, #fff);
+          font-feature-settings:
+            "liga" off,
+            "clig" off;
+          text-overflow: ellipsis;
+          font-family: "Roboto Mono";
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 16px;
+          div {
+            white-space: pre-wrap;
+          }
+        }
+
         display: grid;
         grid-template-columns: auto 1fr;
         max-height: 200px;
-        overflow: scroll;
+        overflow-y: auto;
       }
     }
 
@@ -503,6 +453,23 @@ export default {
     overflow: hidden;
     height: 100%;
     flex: 1;
+  }
+}
+
+.el-button {
+  color: #8b85f4;
+}
+
+.el-dialog {
+  background-color: #8b85f4 !important;
+}
+.dialog-content {
+  max-height: 400px;
+  overflow: auto;
+  text-align: start;
+
+  pre {
+    text-wrap: wrap;
   }
 }
 </style>
