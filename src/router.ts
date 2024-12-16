@@ -26,6 +26,14 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: false },
       },
       {
+        path: "/activities",
+        name: "ActivityFeedPage",
+        component: () => {
+          return import("./ui-components/edge-node/pages/LandingPage/ActivityFeedPage.vue");
+        },
+        meta: { requiresAuth: false },
+      },
+      {
         path: "/explore",
         name: "KnowledgeGraphPage",
         component: () => {

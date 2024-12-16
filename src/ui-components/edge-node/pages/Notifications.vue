@@ -34,11 +34,11 @@
             </el-table>
           </div>
           <div class="d-none d-lg-block w-50 text-center">
-<!--            <img-->
-<!--              src="/images/notifications-background-new.svg"-->
-<!--              alt="Notifications Background"-->
-<!--              class="pt-1 notifications-image"-->
-<!--            />-->
+            <!--            <img-->
+            <!--              src="/images/notifications-background-new.svg"-->
+            <!--              alt="Notifications Background"-->
+            <!--              class="pt-1 notifications-image"-->
+            <!--            />-->
           </div>
         </div>
         <div class="row py-4 gy-2 footer">

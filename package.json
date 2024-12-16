@@ -27,7 +27,7 @@
     "3d-force-graph": "^1.74.1",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "chart.js": "^4.4.3",
+    "chart.js": "^4.4.7",
     "element-plus": "^2.7.6",
     "ionicons": "^7.0.0",
     "isomorphic-dompurify": "^2.12.0",
