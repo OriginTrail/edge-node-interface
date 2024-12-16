@@ -7,7 +7,11 @@
       </button>
     </div>
 
-    <div v-for="(item, index) in activities" :key="index" class="activity-item">
+    <div
+      v-for="(item, index) in activities"
+      :key="index"
+      class="box activity-item"
+    >
       <img class="icon-img" src="/images/explorer-ka.png" alt="Icon" />
 
       <div class="details">
@@ -87,9 +91,9 @@ export default {
 
 <style scoped>
 .activity-feed {
-  width: 100%; 
+  width: 100%;
   min-width: 50% !important;
-  max-width: 1200px; 
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -106,7 +110,7 @@ export default {
 .activity-item {
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
   margin-bottom: 15px;
   padding: 5px;
   background: radial-gradient(
@@ -117,19 +121,19 @@ export default {
   border: 1.5px solid #8b85f4;
   border-radius: 8px;
 
-  width: 100%; 
-  box-sizing: border-box; 
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .icon-img {
   margin-left: 15px;
-  width: 70px; 
+  width: 70px;
   height: 70px;
 }
 
 .icon-img-small {
-  width: 20px; 
-  height: 20px; 
+  width: 20px;
+  height: 20px;
 }
 
 .details p {
@@ -141,13 +145,13 @@ export default {
 
 .nice-status {
   margin: 5px 2px;
-  padding: 5px 8px; 
-  background-color: #8b85f4; 
+  padding: 5px 8px;
+  background-color: #8b85f4;
   color: white;
   border: none;
-  border-radius: 25px; 
-  font-size: 16px; 
-  cursor: pointer; 
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .details {
@@ -157,51 +161,51 @@ export default {
 .inline-details {
   width: 100%;
   display: flex;
-  gap: 25px; 
-  align-items: bottom; 
+  gap: 25px;
+  align-items: bottom;
   margin-top: 20px;
 }
 
 .inline-details p {
-  margin: 0; 
+  margin: 0;
 }
 
 .activity-header {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  color: white; 
-  padding: 20px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 20px;
   border-radius: 10px;
-  background-image: url("/images/activity-feed.svg"); 
-  background-size: cover; 
-  background-position: center; 
+  background-image: url("/images/activity-feed.svg");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 30px;
 }
 
 .activity-header h2 {
   font-family: "Space Grotesk";
-  margin: 0; 
-  font-size: 1.5rem; 
+  margin: 0;
+  font-size: 1.5rem;
 }
 
 .activity-header .show-all-activity {
-  background: none; 
-  border: none; 
-  color: white; 
-  font-size: 1rem; 
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
   cursor: pointer;
 }
 
 .ual {
-  color: #6d6ac6; 
-  font-weight: bold; 
+  color: #6d6ac6;
+  font-weight: bold;
 }
 
 .inline-row-style {
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 </style>

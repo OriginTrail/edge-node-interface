@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-charts">
+  <div class="box dashboard-charts">
     <div class="chart">
       <div class="chart-header">
         <h3>Number of Knowledge Assets on the DKG</h3>
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="dashboard-charts">
+  <div class="box dashboard-charts">
     <div class="chart">
       <div class="chart-header">
         <h3>Total Network Revenue (in TRAC)</h3>
@@ -212,11 +212,7 @@ export default {
 <style scoped>
 .dashboard-charts {
   width: 95%;
-  background: radial-gradient(
-    70% 100% at 20% 107.05%,
-    #03061c 0%,
-    #1b1b34 80% 
-  );
+  background: radial-gradient(70% 100% at 20% 107.05%, #03061c 0%, #1b1b34 80%);
 
   padding: 20px;
   border-radius: 10px;

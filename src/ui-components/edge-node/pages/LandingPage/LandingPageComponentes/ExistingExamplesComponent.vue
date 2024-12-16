@@ -4,30 +4,29 @@
       <h2>Explore existing examples</h2>
     </div>
 
-
     <div class="bottom-container">
-      <div class="bottom-item">
+      <div class="box bottom-item">
         <div class="center-container">
           <p>Decentralized Science (DeSci)</p>
         </div>
       </div>
 
-      <div class="bottom-item">
+      <div class="box bottom-item">
         <div class="center-container">
           <p>Supply chains</p>
         </div>
       </div>
-      <div class="bottom-item">
+      <div class="box bottom-item">
         <div class="center-container">
           <p>Life sciences and healthcare</p>
         </div>
       </div>
-      <div class="bottom-item">
+      <div class="box bottom-item">
         <div class="center-container">
           <p>Construction</p>
         </div>
       </div>
-      <div class="bottom-item">
+      <div class="box bottom-item">
         <div class="center-container">
           <p>Metaverse</p>
         </div>
@@ -48,7 +47,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px; 
+  gap: 20px;
   width: 100%;
 }
 
@@ -83,11 +82,11 @@ export default {
   width: 100%;
   max-width: 1200px;
   gap: 10px;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .center-container p {
-  margin: 0; 
+  margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -103,24 +102,24 @@ export default {
   );
   border: 1.5px solid #8b85f4;
   padding: 25px;
-  width: 18%; 
+  width: 18%;
   text-align: center;
-  border-radius: 8px; 
+  border-radius: 8px;
   font-size: 16px;
   font-family: "Space Grotesk";
   font-weight: 500;
-  min-width: 150px; 
+  min-width: 150px;
 }
 
 @media (max-width: 768px) {
   .bottom-item {
-    width: 45%; 
+    width: 45%;
   }
 }
 
 @media (max-width: 480px) {
   .bottom-item {
-    width: 100%; 
+    width: 100%;
   }
 }
 </style>

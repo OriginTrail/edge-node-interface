@@ -3,12 +3,14 @@
     <table class="custom-table">
       <thead>
         <tr>
-          <th>Owner <span class="purple-arrow"></span></th>
-          <th>UAL <span class="purple-arrow"></span></th>
-          <th>Action <span class="purple-arrow"></span></th>
-          <th>To <span class="purple-arrow"></span></th>
-          <th>Blockchain transaction <span class="purple-arrow"></span></th>
-          <th>Time <span class="purple-arrow"></span></th>
+          <th class="box">Owner <span class="purple-arrow"></span></th>
+          <th class="box">UAL <span class="purple-arrow"></span></th>
+          <th class="box">Action <span class="purple-arrow"></span></th>
+          <th class="box">To <span class="purple-arrow"></span></th>
+          <th class="box">
+            Blockchain transaction <span class="purple-arrow"></span>
+          </th>
+          <th class="box">Time <span class="purple-arrow"></span></th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +57,9 @@ export default {
 </script>
 
 <style scoped>
+.box {
+  border-radius: 0 !important;
+}
 .table-container {
   border: 1.5px solid rgba(139, 133, 244, 0.5);
   border-radius: 10px;
@@ -62,7 +67,7 @@ export default {
 }
 
 .custom-table {
-  border: 1.5px solid rgba(139, 133, 244, 0.5);
+  /* border: 1.5px solid rgba(139, 133, 244, 0.5); */
   width: 100%;
   border-collapse: collapse;
   color: #ffffff;
@@ -73,8 +78,8 @@ export default {
   border-bottom: 1.5px solid rgba(139, 133, 244, 0.5);
   background: radial-gradient(
     53.33% 60.69% at 20% 50%,
-     #03061c 0%,
-    #1b1b34 100% 
+    #03061c 0%,
+    #1b1b34 100%
   );
 
   padding: 10px 15px;
@@ -86,7 +91,7 @@ export default {
   padding: 10px 15px;
   text-align: left;
 
-  border-bottom: 1.5px solid rgba(139, 133, 244, 0.5); 
+  border-bottom: 1.5px solid rgba(139, 133, 244, 0.5);
 }
 
 .custom-table tr:first-child th {
@@ -109,6 +114,5 @@ export default {
   margin-left: 8px;
   background: url("/images/icons/purple-arrow.svg") no-repeat center center;
   background-size: contain;
- 
 }
 </style>
