@@ -34,7 +34,7 @@
             />
             <div class="kpi">
               <h3>Number of Knowledge Assets</h3>
-              <span class="highlight">100 000 000</span>
+              <span class="highlight">{{ numOfKAs }}</span>
             </div>
           </div>
           <div>
@@ -45,7 +45,7 @@
             />
             <div class="kpi">
               <h3>Total TRAC staked</h3>
-              <span>73 281 493.79</span>
+              <span>{{ totalTracStaked }}</span>
             </div>
           </div>
         </div>
@@ -75,6 +75,11 @@ import ActivityFeed from "./LandingPageComponentes/ActivityFeedComponent.vue";
 import GraphsComponent from "./LandingPageComponentes/GraphsComponent.vue";
 import FooterComponent from "./LandingPageComponentes/FooterComponent.vue";
 
+import {
+  getNumberOfKnowledgeAssets,
+  getTotalTracStaked,
+} from "@/services/metricsService.js";
+
 export default {
   components: {
     IonPage,
@@ -83,6 +88,24 @@ export default {
     ActivityFeed,
     GraphsComponent,
     FooterComponent,
+  },
+  data() {
+    return {
+      numOfKAs: 0,
+      totalTracStaked: 0,
+    };
+  },
+  mounted() {
+    // this.getNumberOfKAs();
+    // this.getTotalTrac();
+  },
+  methods: {
+    async getNumberOfKAs() {
+      this.numOfKAs = await getNumberOfKnowledgeAssets();
+    },
+    async getTotalTrac() {
+      this.totalTracStaked = await getTotalTracStaked();
+    },
   },
 };
 </script>
