@@ -8,7 +8,10 @@
           <span style="color: #8b85f4" class="value">4 503 319</span>
         </div>
       </div>
-      <canvas ref="knowledgeChart"></canvas>
+      
+        <canvas ref="knowledgeChart"></canvas>  
+ 
+      
     </div>
   </div>
 
@@ -213,11 +216,13 @@ export default {
 .dashboard-charts {
   width: 95%;
   background: radial-gradient(70% 100% at 20% 107.05%, #03061c 0%, #1b1b34 80%);
-
-  padding: 20px;
+  height: 333px;
+  padding: 5px 20px;
   border-radius: 10px;
   border: 1.5px solid #8b85f4;
 }
+
+
 
 .dashboard-charts:not(:first-child) {
   margin-top: 30px;
@@ -239,15 +244,15 @@ export default {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 1.5em;
+  font-size: 1.1em;
   font-weight: bold;
 }
 
 .icon-knowledge-asset {
-  margin-top: 4px;
+
   display: inline-block;
-  width: 24px;
-  height: 20px;
+  width: 20px;
+  height: 15px;
   background-image: url("/images/icons/knowledge-asset.svg");
   background-size: cover;
   background-position: center;
@@ -255,13 +260,32 @@ export default {
 }
 
 .icon-trac-token {
-  margin-top: 4px;
+
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-image: url("/images/icons/trac-token-icon.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
+canvas {
+  
+  padding-bottom: 45px ;
+}
+
+@media (max-width: 1300px) {
+  .dashboard-charts {
+    height: auto;
+    width: 100%;
+  }
+
+  .canvas {
+    padding-bottom: 0;
+    }
+}
+
+
+
 </style>

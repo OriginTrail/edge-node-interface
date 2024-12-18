@@ -151,8 +151,8 @@ export default {
   gap: 20px;
   width: 100%;
 
-  > .left,
-  > .right {
+   .left,
+   .right {
     flex: 1;
   }
 }
@@ -162,8 +162,8 @@ export default {
     flex-direction: column;
   }
 
-  > .left,
-  > .right {
+   .left,
+   .right {
     flex: none;
     width: 100%;
   }

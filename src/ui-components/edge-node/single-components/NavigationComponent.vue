@@ -218,4 +218,11 @@ a.router-link-exact-active ion-label {
 .actions-wrapper {
   gap: 24px;
 }
+
+@media (max-width: 1000px) {
+  .input {
+    visibility: hidden;
+    width: 0;
+  }
+}
 </style>

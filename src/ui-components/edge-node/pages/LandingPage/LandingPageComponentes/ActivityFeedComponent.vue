@@ -2,94 +2,158 @@
   <div class="activity-feed">
     <div class="activity-header">
       <h2>Activity feed</h2>
-      <button class="show-all-activity">
-        Show all activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;
-      </button>
+      <button class="show-all-activity">Show all activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;</button>
     </div>
 
-    <div
-      v-for="(item, index) in activities"
-      :key="index"
-      class="box activity-item"
-    >
-      <img class="icon-img" src="/images/explorer-ka.png" alt="Icon" />
+    <div class="parent-div">
+      <transition-group
+        name="scroll"
+        tag="div"
+        class="activity-list"
+      >
+        <div
+          v-for="(item, index) in visibleActivities"
+          :key="item.ual" 
+          class="box activity-item"
+        >
+          <img class="icon-img" src="/images/explorer-ka.png" alt="Icon" />
 
-      <div class="details">
-        <p>
-          <strong>UAL:</strong> <span class="ual">{{ item.ual }}</span>
-        </p>
+          <div class="details">
+            <p>
+              <strong>UAL:</strong> <span class="ual">{{ item.ual }}</span>
+            </p>
 
-        <div class="inline-details">
-          <div class="nice-status">{{ item.status }}</div>
+            <div class="inline-details">
+              <div class="nice-status">{{ item.status }}</div>
 
-          <img
-            style="margin-top: 10px"
-            class="icon-img-small"
-            src="/images/icons/link-icon.svg"
-            alt="Chain Icon"
-          />
+              <img
+                style="margin-top: 10px"
+                class="icon-img-small"
+                src="/images/icons/link-icon.svg"
+                alt="Chain Icon"
+              />
 
-          <div style class="inline-row-style">
-            <img
-              class="icon-img-small"
-              src="/images/icons/base-blockchain.svg"
-              alt="Base Icon"
-            />
-            <p style="padding: 10px 0px">{{ item.network }}</p>
+              <div class="inline-row-style">
+                <img
+                  class="icon-img-small"
+                  src="/images/icons/base-blockchain.svg"
+                  alt="Base Icon"
+                />
+                <p style="padding: 10px 0px">{{ item.network }}</p>
+              </div>
+
+              <p style="padding: 10px; margin-left: auto; color: #636575">
+                {{ item.time }}
+              </p>
+            </div>
           </div>
-
-          <p style="padding: 10px; margin-left: auto; color: #636575">
-            {{ item.time }}
-          </p>
         </div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
 
-<script>
-import { DKG_EXPLORER_URL } from "@/utils/constants";
 
+
+
+<script>
 export default {
   name: "ActivityFeed",
   data() {
     return {
       activities: [
-        {
-          ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09",
-          status: "Created",
-          network: "Base",
-          time: "2s Ago",
-        },
-        {
-          ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09",
-          status: "Created",
-          network: "Base",
-          time: "3s Ago",
-        },
-        {
-          ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09",
-          status: "Created",
-          network: "Base",
-          time: "3s Ago",
-        },
-        // Add more items as needed
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "2s Ago" },
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "3s Ago" },
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "4s Ago" },
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "5s Ago" },
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "6s Ago" },
+        { ual: "dkg://did:otp:0xDbF8e9d36A73Cd890efF09", status: "Created", network: "Base", time: "7s Ago" },
       ],
+      visibleActivities: [],
+      currentIndex: 5, // Indeks odakle započinjemo
     };
   },
   mounted() {
-    const button = document.querySelector(".show-all-activity");
-    if (button) {
-      button.addEventListener("click", () => {
-        window.location.href = "http://localhost:5173/activities";
-        //window.location.href = DKG_EXPLORER_URL + "/activities";
-      });
-    }
+    this.initializeVisibleActivities();
+    this.startAnimation();
+  },
+  methods: {
+    initializeVisibleActivities() {
+      this.visibleActivities = this.activities.slice(0, 5);
+    },
+    startAnimation() {
+      setInterval(() => {
+        if (this.currentIndex < this.activities.length) {
+          const newActivity = this.activities[this.currentIndex];
+          this.visibleActivities = [
+            newActivity,
+            ...this.visibleActivities.slice(0, 4),
+          ];
+          this.currentIndex++;
+        } else {
+          this.currentIndex = 0;
+        }
+      }, 1000); // Ažuriranje svake sekunde
+    },
   },
 };
 </script>
 
 <style scoped>
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.scroll-enter-active,
+.scroll-leave-active {
+  transition: transform 1s ease, opacity 1s ease; /* Tranzicija traje 1 sekundu */
+}
+
+.scroll-enter-from {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.scroll-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.scroll-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.scroll-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  background: radial-gradient(
+    53.33% 74.69% at 50% 107.05%,
+    #03061c 0%,
+    #1b1b34 100%
+  );
+  border: 1.5px solid #8b85f4;
+  border-radius: 8px;
+}
+.parent-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Razmak između divova */
+  max-width: 100%; /* Ograničenje širine */
+  overflow-y: auto; /* Scroll ako divovi pređu visinu roditelja */
+}
+
 .activity-feed {
   width: 100%;
   min-width: 50% !important;

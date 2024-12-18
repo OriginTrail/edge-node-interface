@@ -111,4 +111,25 @@ export default {
   margin-right: 10px;
   font-weight: 300;
 }
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+@media screen and (max-width: 600px) {
+  .box {
+    flex-direction: column;
+  }
+
+  .details-right {
+    order: 2;
+  }
+
+  .details-left {
+    order: 1;
+  }
+}
+
 </style>
