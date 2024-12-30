@@ -254,7 +254,7 @@ export default {
     performApiSearch(question, latestQuestionIndex) {
       axios
         .post(
-          `${this.endpoints.dRAG}/server/api/example`,
+          `${this.endpoints.dRAG}/server/api/ask`,
           {
             question: question,
             useLLM: true,
