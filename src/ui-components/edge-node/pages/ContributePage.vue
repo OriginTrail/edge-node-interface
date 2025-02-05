@@ -479,6 +479,15 @@ async function transformFilesToKAs() {
   }
 }
 
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+
 async function processUploadedFiles() {
   try {
     if (!fileUploadInput.value.files?.length) return;
@@ -525,7 +534,7 @@ async function publishKAs() {
       {
         knowledgeAssets: kaGenerated.value.map((ka) => ({
           ...ka,
-          content: JSON.stringify(ka.content),
+          content: (isJsonString(ka.content)) ? ka.content : JSON.stringify(ka.content),
         })),
       },
       { withCredentials: true },
