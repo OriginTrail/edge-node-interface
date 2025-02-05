@@ -73,7 +73,7 @@ router.beforeEach((to, from, next) => {
   } else {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
       axios
-        .get(`${import.meta.env.VITE_AUTH_SERVICE_ENDPOINT}/auth/check`, {
+        .get(`${import.meta.env.VITE_AUTH_SERVICE_ENDPOINT}/check`, {
           withCredentials: true,
         })
         .then(async (response) => {
