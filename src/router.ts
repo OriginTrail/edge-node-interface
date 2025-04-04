@@ -25,6 +25,13 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
+        path: "/knowledge-graph",
+        name: "KnowledgeGraph",
+        component: () =>
+          import("./ui-components/edge-node/pages/KnowledgeGraphPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
         path: "/knowledge-bank",
         name: "KnowledgeBank",
         component: () =>
