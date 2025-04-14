@@ -19,6 +19,13 @@
             <ion-label>Dashboard</ion-label>
           </router-link>
         </ion-tab-button>
+        <ion-tab-button tab="knowledge-graph">
+          <router-link to="/knowledge-graph" class="router-link">
+            <ion-label>
+              {{ "Knowledge graph" }}
+            </ion-label>
+          </router-link>
+        </ion-tab-button>
         <ion-tab-button tab="knowledge-bank">
           <router-link to="/knowledge-bank" class="router-link">
             <ion-label>

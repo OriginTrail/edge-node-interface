@@ -13,6 +13,16 @@ export const isUal = (value) => {
 
   return ualReg.test(value);
 };
+export const cleanUal = (ual) => {
+  if (!ual) return "";
+  let cleanedUal = ual.trim().toLowerCase();
+
+  if (cleanedUal.endsWith("/")) {
+    cleanedUal = cleanedUal.slice(0, -1);
+  }
+
+  return cleanedUal;
+};
 
 export const getTokenId = (value) => {
   if (!isUal(value)) {
