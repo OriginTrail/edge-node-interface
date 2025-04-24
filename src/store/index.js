@@ -11,11 +11,9 @@ const store = createStore({
   },
   actions: {
     login({ commit }, user) {
-      // Logic to log in the user
       commit("setUser", user);
     },
     logout({ commit }) {
-      // Logic to log out the user
       commit("setUser", null);
     },
   },
